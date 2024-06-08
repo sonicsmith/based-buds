@@ -1,0 +1,32 @@
+{
+  "name": "based-buddies",
+  "version": "0.0.5",
+  "private": false,
+  "type": "module",
+  "dependencies": {
+    "@vercel/postgres": "^0.8.0",
+    "@xmtp/xmtp-js": "^11.6.3",
+    "frames.js": "^0.16.5",
+    "next": "^14.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.17.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "concurrently": "^8.2.2",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.3",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "dev": "concurrently \"next dev\" \"frames --url http://localhost:3000\"",
+    "start": "next start",
+    "build": "next build",
+    "lint": "next lint"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}
