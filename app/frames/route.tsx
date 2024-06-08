@@ -9,10 +9,10 @@ const handleRequest = frames(async (ctx) => {
     image: `${baseUrl}/images/main.jpg`,
     imageOptions: { aspectRatio: "1:1" },
     buttons: [
-      <Button action="post" target="/browse">
+      <Button action="post" target="/browse" key="1">
         See Profiles
       </Button>,
-      <Button action="post" target="/add-title">
+      <Button action="post" target="/add-title" key="2">
         Create Profile
       </Button>,
     ],

@@ -16,7 +16,7 @@ const handleRequest = frames(async (ctx: any) => {
   return {
     image: <div tw="flex flex-col">Create</div>,
     buttons: [
-      <Button action="post" target={"/create"}>
+      <Button action="post" target={"/create"} key="1">
         Create Profile
       </Button>,
     ],

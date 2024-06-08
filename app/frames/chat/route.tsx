@@ -18,7 +18,7 @@ const handleRequest = frames(async (ctx: any) => {
     ),
     textInput: "Enter Message",
     buttons: [
-      <Button action="post" target={"/chat"}>
+      <Button action="post" target={"/chat"} key="1">
         Send
       </Button>,
     ],

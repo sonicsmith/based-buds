@@ -28,13 +28,13 @@ const handleRequest = frames(async (ctx: any) => {
       </div>
     ),
     buttons: [
-      <Button action="post" target={"/browse"}>
+      <Button action="post" target={"/browse"} key="1">
         Swipe Left
       </Button>,
-      <Button action="post" target={"/chat"}>
+      <Button action="post" target={"/chat"} key="2">
         Chat Now
       </Button>,
-      <Button action="post" target={"/"}>
+      <Button action="post" target={"/"} key="3">
         Home
       </Button>,
     ],

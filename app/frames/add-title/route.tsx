@@ -6,7 +6,7 @@ const handleRequest = frames(async (ctx: any) => {
     image: <div tw="flex flex-col">Enter a title for your profile</div>,
     textInput: `Profile Title`,
     buttons: [
-      <Button action="post" target={"/add-bio"}>
+      <Button action="post" target={"/add-bio"} key="1">
         Add
       </Button>,
     ],
