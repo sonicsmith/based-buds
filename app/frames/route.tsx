@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+
 import { Button } from "frames.js/next";
 import { appURL } from "@/app/utils";
 import { frames } from "@/app/frames";

@@ -40,7 +40,9 @@ const handleRequest = frames(async (ctx: any) => {
         {!shouldShow ? (
           <div tw="flex flex-col items-center text-5xl">
             <div>Exporting your private key allows you to use</div>
-            <div>your "Based Bud" address anywhere.</div>
+            <div tw="flex">
+              your <div tw="font-bold">Based Bud</div> address anywhere.
+            </div>
             <div>Do not share this key with anyone.</div>
             <div>Do you still wish to continue?</div>
           </div>

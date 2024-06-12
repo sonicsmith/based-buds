@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+
 import { Container } from "@/app/components/Container";
 import { ProfileView } from "@/app/components/ProfileView";
 import { frames } from "@/app/frames";

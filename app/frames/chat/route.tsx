@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+
 import { Container } from "@/app/components/Container";
 import { frames } from "@/app/frames";
 import { getFonts } from "@/app/utils/display";
