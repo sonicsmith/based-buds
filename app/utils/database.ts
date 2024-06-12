@@ -1,37 +1,53 @@
-interface Profile {
-  address: string;
+import { QueryResult, QueryResultRow, sql } from "@vercel/postgres";
+
+export interface Profile {
+  ownersAddress: string;
+  accountAddress: string;
   title: string;
   bio: string;
 }
 
-const demoData = [
-  {
-    address: "0x1",
-    title: "Single White Female",
-    bio: "Single White Female seeks degen for alpha",
-  },
-  {
-    address: "0x2",
-    title: "Man with money",
-    bio: "Male degen with bags of money looking for a good time",
-  },
-  {
-    address: "0x3",
-    title: "Tall woman",
-    bio: "7 foot tall woman seeks dwarf for fun and games",
-  },
-];
-
-// TODO: Get from database
 export const getProfile = async (index: number): Promise<Profile> => {
-  const safeIndex = index % demoData.length;
-  return new Promise((res) => res(demoData[safeIndex]));
+  const countResponse = await sql`SELECT COUNT(*) FROM Profiles;`;
+  const safeIndex = index % countResponse.rows[0].count;
+  const response =
+    await sql`SELECT * FROM Profiles LIMIT 1 OFFSET ${safeIndex};`;
+  const profile = response.rows[0];
+  return {
+    ownersAddress: profile.ownersaddress,
+    accountAddress: profile.accountaddress,
+    title: profile.title,
+    bio: profile.bio,
+  };
 };
 
-export const createProfile = async (profile: Profile): Promise<void> => {
-  return new Promise((res) => res());
+export const getProfileForAddress = async (
+  ownersAddress: string
+): Promise<Profile | null> => {
+  const { rows } =
+    await sql`SELECT * FROM Profiles WHERE OwnersAddress = ${ownersAddress};`;
+  if (rows.length === 0) {
+    return null;
+  }
+  const profile = rows[0];
+  return {
+    ownersAddress: profile.ownersaddress,
+    accountAddress: profile.accountaddress,
+    title: profile.title,
+    bio: profile.bio,
+  };
 };
 
-export const deleteProfile = async (address: string): Promise<void> => {
-  return new Promise((res) => res());
+export const createProfile = async (
+  profile: Profile
+): Promise<QueryResult<QueryResultRow>> => {
+  const { ownersAddress, accountAddress, title, bio } = profile;
+  console.log("Creating profile", profile);
+  return sql`INSERT INTO Profiles (OwnersAddress, AccountAddress, Title, Bio) VALUES (${ownersAddress}, ${accountAddress}, ${title}, ${bio});`;
+};
+
+export const deleteProfile = async (
+  ownersAddress: string
+): Promise<QueryResult<QueryResultRow>> => {
+  return sql`DELETE FROM Profiles WHERE OwnersAddress = ${ownersAddress};`;
 };

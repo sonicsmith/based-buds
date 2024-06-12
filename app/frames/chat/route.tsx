@@ -1,25 +1,93 @@
 import { frames } from "@/app/frames";
-import { Client } from "@xmtp/xmtp-js";
-import { TransactionTargetResponse, getFrameMessage } from "frames.js";
-import { transaction } from "frames.js/core";
+import { getAccountAddress, getOwnersAddress } from "@/app/utils/identity";
+import { createConversation, getConversations } from "@/app/utils/xmtp";
+import { Conversation, DecodedMessage } from "@xmtp/xmtp-js";
 import { Button } from "frames.js/next";
 
 const handleRequest = frames(async (ctx: any) => {
-  if (ctx.pressedButton) {
-    // transaction(txdata);
-    // const xmtp = await Client.create(signer, { env: "production" });
-    // const conversation = await xmtp.conversations.newConversation("address");
-    // await conversation.send(ctx.message?.inputText);
+  let conversation: Conversation | null = null;
+  const ownersAddress = await getOwnersAddress(ctx);
+  const accountAddress = await getAccountAddress(ownersAddress);
+  // If conversation exists
+  if (ctx.searchParams.topic) {
+    // Get conversation
+    const conversations = await getConversations(ownersAddress);
+    const foundConversation = conversations.find(
+      (c) => c.topic === ctx.searchParams.topic
+    );
+    conversation = foundConversation || null;
+  } else {
+    // Create new conversation
+    const peerAddress = ctx.searchParams.address;
+    conversation = await createConversation({ ownersAddress, peerAddress });
+  }
+
+  let messages: DecodedMessage[] = [];
+
+  if (conversation) {
+    messages = await conversation.messages();
+  }
+
+  const messageDisplay = messages
+    .sort((a, b) => (a.sent > b.sent ? -1 : 1))
+    .slice(0, 7) // Remove excess messages for now
+    .map((message, index) => {
+      const isFromSender = message.senderAddress === accountAddress;
+      const text = message.content;
+      const colors = isFromSender
+        ? "bg-white text-black border-2 border-black"
+        : "bg-black text-white";
+      const alignment = isFromSender ? "justify-start" : "justify-end";
+      const leftBubble = "rounded-tl-3xl rounded-tr-3xl rounded-br-3xl";
+      const rightBubble = "rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl";
+      const shape = isFromSender ? leftBubble : rightBubble;
+      if (text) {
+        return (
+          <div tw={`flex w-full ${alignment}`} key={`message${index}`}>
+            <div tw={`${colors} ${shape} p-4 my-2`} key={`message-${index}`}>
+              {message.content}
+            </div>
+          </div>
+        );
+      }
+    })
+    .filter((m): m is JSX.Element => !!m);
+
+  if (ctx.pressedButton && ctx.message.inputText) {
+    await conversation?.send(ctx.message.inputText);
+    // Fake the message if this occurs
+    console.log("pushing");
+    messageDisplay.unshift(
+      <div tw={`flex w-full justify-end`} key={"lastMessage"}>
+        <div
+          tw={`bg-black text-white rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl p-4 my-2`}
+        >
+          {ctx.message.inputText}
+        </div>
+      </div>
+    );
   }
 
   return {
     image: (
-      <div tw="flex flex-col">This is the start of your conversation with</div>
+      <div tw="flex flex-col w-full p-6 bg-blue-200 h-screen justify-end">
+        {!messageDisplay.length ? (
+          <div tw="m-auto">This is the start of your conversation</div>
+        ) : (
+          <div tw="flex flex-col-reverse">{messageDisplay}</div>
+        )}
+      </div>
     ),
     textInput: "Enter Message",
     buttons: [
-      <Button action="post" target={"/chat"} key="1">
+      <Button
+        action="post"
+        target={{ pathname: "/chat", query: { topic: conversation?.topic } }}
+      >
         Send
+      </Button>,
+      <Button action="post" target={"/"}>
+        Home
       </Button>,
     ],
   };

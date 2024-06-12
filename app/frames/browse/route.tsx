@@ -1,13 +1,18 @@
+import { Container } from "@/app/components/Container";
+import { ProfileView } from "@/app/components/ProfileView";
 import { frames } from "@/app/frames";
-import { appURL } from "@/app/utils";
 import { getProfile } from "@/app/utils/database";
+import { getOwnersAddress } from "@/app/utils/identity";
 import { Button } from "frames.js/next";
-import { get } from "http";
 
-// const baseUrl = appURL();
+export const runtime = "edge";
+
+const kanitRegularFont = fetch(
+  new URL("/public/fonts/Kanit/Kanit-Regular.ttf", import.meta.url)
+).then((res) => res.arrayBuffer());
 
 const handleRequest = frames(async (ctx: any) => {
-  console.log(ctx);
+  const [kanitRegularFontData] = await Promise.all([kanitRegularFont]);
 
   const currentState = ctx.state;
 
@@ -19,25 +24,50 @@ const handleRequest = frames(async (ctx: any) => {
   };
 
   const profile = await getProfile(updatedState.userIndex);
+  const ownersAddress = await getOwnersAddress(ctx);
+
+  const buttons = [
+    <Button action="post" target={"/browse"}>
+      Swipe Left
+    </Button>,
+  ];
+  // Can't chat to self
+  if (profile.ownersAddress !== ownersAddress) {
+    buttons.push(
+      <Button
+        action="post"
+        target={{
+          pathname: "/chat",
+          query: { address: profile.accountAddress },
+        }}
+      >
+        Chat Now
+      </Button>
+    );
+  }
+
+  buttons.push(
+    <Button action="post" target={"/"}>
+      Home
+    </Button>
+  );
 
   return {
     image: (
-      <div tw="flex flex-col">
-        <div tw="mb-10">{profile.title}</div>
-        <div tw="">{profile.bio}</div>
-      </div>
+      <Container>
+        <ProfileView title={profile.title} bio={profile.bio} />
+      </Container>
     ),
-    buttons: [
-      <Button action="post" target={"/browse"} key="1">
-        Swipe Left
-      </Button>,
-      <Button action="post" target={"/chat"} key="2">
-        Chat Now
-      </Button>,
-      <Button action="post" target={"/"} key="3">
-        Home
-      </Button>,
-    ],
+    imageOptions: {
+      fonts: [
+        {
+          name: "Kanit",
+          data: kanitRegularFontData,
+          weight: 400,
+        },
+      ],
+    },
+    buttons,
     state: updatedState,
   };
 });
