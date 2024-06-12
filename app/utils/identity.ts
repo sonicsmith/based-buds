@@ -27,7 +27,6 @@ export const getUserSigner = async (address: string) => {
 };
 
 export const getOwnersAddress = async (ctx: any) => {
-  console.log("ctx", ctx);
   // XMTP, Farcaster, or Lens address
   let walletAddress: string | undefined =
     // farcaster

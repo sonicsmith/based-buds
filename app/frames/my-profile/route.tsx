@@ -5,21 +5,24 @@ import { frames } from "@/app/frames";
 import { getProfileForAddress } from "@/app/utils/database";
 import { ProfileView } from "@/app/components/ProfileView";
 import { getOwnersAddress } from "@/app/utils/identity";
+import { getFonts } from "@/app/utils/display";
+import { Container } from "@/app/components/Container";
 
 const handleRequest = frames(async (ctx: any) => {
   const address = await getOwnersAddress(ctx);
   const profile = await getProfileForAddress(address);
-
+  const fonts = await getFonts();
   return {
     image: (
-      <div tw="flex flex-col p-8 bg-blue-200 w-full h-screen justify-center">
+      <Container>
         {!!profile ? (
           <ProfileView title={profile.title} bio={profile.bio} />
         ) : (
           <div>Click below to create a profile</div>
         )}
-      </div>
+      </Container>
     ),
+    imageOptions: { fonts },
     buttons: [
       <Button
         action="post"

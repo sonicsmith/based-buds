@@ -1,4 +1,6 @@
+import { Container } from "@/app/components/Container";
 import { frames } from "@/app/frames";
+import { getFonts } from "@/app/utils/display";
 import { getAccountAddress, getOwnersAddress } from "@/app/utils/identity";
 import { createConversation, getConversations } from "@/app/utils/xmtp";
 import { Conversation, DecodedMessage } from "@xmtp/xmtp-js";
@@ -56,7 +58,6 @@ const handleRequest = frames(async (ctx: any) => {
   if (ctx.pressedButton && ctx.message.inputText) {
     await conversation?.send(ctx.message.inputText);
     // Fake the message if this occurs
-    console.log("pushing");
     messageDisplay.unshift(
       <div tw={`flex w-full justify-end`} key={"lastMessage"}>
         <div
@@ -68,16 +69,22 @@ const handleRequest = frames(async (ctx: any) => {
     );
   }
 
+  const fonts = await getFonts();
+
   return {
     image: (
-      <div tw="flex flex-col w-full p-6 bg-blue-200 h-screen justify-end">
+      <Container justify={"justify-end"}>
         {!messageDisplay.length ? (
-          <div tw="m-auto">This is the start of your conversation</div>
+          <div tw="flex flex-col m-auto">
+            <div>This is the start of your conversation</div>
+            <div>Say Hello to your new bud! 👋</div>
+          </div>
         ) : (
           <div tw="flex flex-col-reverse">{messageDisplay}</div>
         )}
-      </div>
+      </Container>
     ),
+    imageOptions: { fonts },
     textInput: "Enter Message",
     buttons: [
       <Button
