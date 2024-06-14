@@ -4,6 +4,7 @@ import { Button } from "frames.js/next";
 import { frames } from "@/app/frames";
 import { getPrivateKey, getOwnersAddress } from "@/app/utils/identity";
 import { Container } from "@/app/components/Container";
+import { getFonts } from "@/app/utils/display";
 
 const getSplitKey = (privateKey: string) => {
   const start = privateKey.substring(0, 20);
@@ -14,6 +15,7 @@ const getSplitKey = (privateKey: string) => {
 const handleRequest = frames(async (ctx: any) => {
   const address = await getOwnersAddress(ctx);
   const privateKey = await getPrivateKey(address);
+  const fonts = await getFonts();
 
   const shouldShow = ctx.searchParams.show;
 
@@ -23,7 +25,13 @@ const handleRequest = frames(async (ctx: any) => {
     </Button>,
   ];
 
-  if (!shouldShow) {
+  if (shouldShow) {
+    buttons.push(
+      <Button action="link" target={"https://deconverse.com/"}>
+        Visit Deconverse
+      </Button>
+    );
+  } else {
     buttons.unshift(
       <Button
         action="post"
@@ -38,23 +46,31 @@ const handleRequest = frames(async (ctx: any) => {
     image: (
       <Container>
         {!shouldShow ? (
-          <div tw="flex flex-col items-center text-5xl">
-            <div>Exporting your private key allows you to use</div>
-            <div tw="flex">
-              your <div tw="font-bold">Based Bud</div> address anywhere.
+          <div tw="flex flex-col items-center rounded-full bg-white p-8">
+            <div tw="mb-2">Exporting your private key allows you</div>
+            <div tw="mb-2">
+              to use your &apos;Based Bud&apos; address anywhere.
             </div>
-            <div>Do not share this key with anyone.</div>
+            <div tw="mb-2">Do not share this key with anyone.</div>
+            <div tw="mb-6"></div>
             <div>Do you still wish to continue?</div>
           </div>
         ) : (
-          <div tw="flex flex-col items-center text-5xl">
-            <div>{getSplitKey(privateKey)[0]}</div>
-            <div>{getSplitKey(privateKey)[1]}</div>
+          <div tw="flex flex-col">
+            <div tw="flex flex-col items-center rounded-full bg-white p-8">
+              <div>{getSplitKey(privateKey)[0]}</div>
+              <div>{getSplitKey(privateKey)[1]}</div>
+            </div>
+            <div tw="flex flex-col items-center rounded-full bg-white p-8 mt-4">
+              <div>You can use this key to chat in another XMTP</div>
+              <div>chat client. We recommend Deconverse.</div>
+            </div>
           </div>
         )}
       </Container>
     ),
     buttons,
+    imageOptions: { fonts },
   };
 });
 

@@ -69,12 +69,17 @@ const handleRequest = frames(async (ctx: any) => {
       <Container>
         {selectedConversation ? (
           <div tw="flex flex-col">
-            <div tw="flex mb-10 justify-center text-5xl">
+            <div tw="flex mb-10 justify-center text-6xl">
               Number of Buds: {conversations.length}
             </div>
             <div tw="flex flex-col bg-white p-10">
-              <div tw="flex justify-center text-6xl">Bud #{budIndex + 1}</div>
-              <div tw="flex justify-center">
+              <div
+                tw="flex justify-center text-7xl"
+                style={{ fontFamily: "LuckiestGuy", fontWeight: 400 }}
+              >
+                Bud #{budIndex + 1}
+              </div>
+              <div tw="flex justify-center text-4xl">
                 (Connected: {format(selectedConversation.createdAt, "d MMM y")})
               </div>
             </div>

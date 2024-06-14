@@ -9,7 +9,7 @@ const baseUrl = appURL();
 const handleRequest = frames(async (ctx) => {
   return {
     image: `${baseUrl}/images/main.jpg`,
-    imageOptions: { aspectRatio: "1.91:1" },
+    imageOptions: { aspectRatio: "1:1" },
     buttons: [
       <Button action="post" target="/browse">
         Browse Buds
