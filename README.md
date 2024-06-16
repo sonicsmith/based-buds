@@ -1,8 +1,8 @@
-# Based Buddies Frame
+# Based Buds Frame
 
 OpenFrames Match making Frame built with Frames.js, NextJS, and XMTP.
 
-![Screenshot](https://github.com/sonicsmith/based-buddies/blob/main/public/images/main.jpg)
+![Screenshot](https://github.com/sonicsmith/based-buds/blob/main/public/images/main.jpg)
 
 Feel free to reuse this code in any way you see fit!
 

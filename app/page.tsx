@@ -4,7 +4,7 @@ import { appURL } from "@/app/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Based Buddies",
+    title: "Based Buds",
     other: {
       ...(await fetchMetadata(new URL("/frames", appURL()))),
     },
@@ -12,5 +12,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  return <div>Based Buddies</div>;
+  return <div>Based Buds</div>;
 }

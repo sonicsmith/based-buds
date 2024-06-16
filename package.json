@@ -1,5 +1,5 @@
 {
-  "name": "based-buddies",
+  "name": "based-buds",
   "version": "0.0.5",
   "private": false,
   "type": "module",
@@ -29,7 +29,6 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"frames --url http://localhost:3000\"",
     "start": "next start",
-    "preinstall": "cd chain && npm install",
     "build": "next build",
     "lint": "next lint"
   },
