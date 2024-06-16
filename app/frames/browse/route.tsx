@@ -4,11 +4,8 @@ import { Container } from "@/app/components/Container";
 import { ProfileView } from "@/app/components/ProfileView";
 import { frames } from "@/app/frames";
 import { getProfile } from "@/app/utils/database";
-import { getFonts } from "@/app/utils/display";
 import { getOwnersAddress } from "@/app/utils/identity";
 import { Button } from "frames.js/next";
-
-export const runtime = "edge";
 
 const handleRequest = frames(async (ctx: any) => {
   const currentState = ctx.state;
@@ -22,8 +19,6 @@ const handleRequest = frames(async (ctx: any) => {
 
   const profile = await getProfile(updatedState.userIndex);
   const ownersAddress = await getOwnersAddress(ctx);
-
-  const fonts = await getFonts();
 
   const buttons = [
     <Button action="post" target={"/browse"}>
@@ -57,7 +52,6 @@ const handleRequest = frames(async (ctx: any) => {
         <ProfileView title={profile.title} bio={profile.bio} />
       </Container>
     ),
-    imageOptions: { fonts },
     buttons,
     state: updatedState,
   };

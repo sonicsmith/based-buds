@@ -4,7 +4,6 @@ import { Button } from "frames.js/next";
 import { frames } from "@/app/frames";
 import { getPrivateKey, getOwnersAddress } from "@/app/utils/identity";
 import { Container } from "@/app/components/Container";
-import { getFonts } from "@/app/utils/display";
 
 const getSplitKey = (privateKey: string) => {
   const start = privateKey.substring(0, 20);
@@ -15,7 +14,6 @@ const getSplitKey = (privateKey: string) => {
 const handleRequest = frames(async (ctx: any) => {
   const address = await getOwnersAddress(ctx);
   const privateKey = await getPrivateKey(address);
-  const fonts = await getFonts();
 
   const shouldShow = ctx.searchParams.show;
 
@@ -70,7 +68,6 @@ const handleRequest = frames(async (ctx: any) => {
       </Container>
     ),
     buttons,
-    imageOptions: { fonts },
   };
 });
 

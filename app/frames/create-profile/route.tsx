@@ -4,7 +4,6 @@ import { Container } from "@/app/components/Container";
 import { ProfileView } from "@/app/components/ProfileView";
 import { State, frames } from "@/app/frames";
 import { createProfile } from "@/app/utils/database";
-import { getFonts } from "@/app/utils/display";
 import { getOwnersAddress } from "@/app/utils/identity";
 import { createXmtpIdentity } from "@/app/utils/xmtp";
 import { Button } from "frames.js/next";
@@ -85,11 +84,8 @@ const handleRequest = frames(async (ctx: any) => {
 
   const textInputs = ["Enter title", "Enter Bio", undefined, undefined];
 
-  const fonts = await getFonts();
-
   return {
     image: <Container>{images[updatedState.editingState]}</Container>,
-    imageOptions: { fonts },
     textInput: textInputs[updatedState.editingState],
     buttons: buttons[updatedState.editingState],
     state: updatedState,

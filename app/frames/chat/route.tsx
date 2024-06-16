@@ -2,7 +2,6 @@
 
 import { Container } from "@/app/components/Container";
 import { frames } from "@/app/frames";
-import { getFonts } from "@/app/utils/display";
 import { getAccountAddress, getOwnersAddress } from "@/app/utils/identity";
 import { createConversation, getConversations } from "@/app/utils/xmtp";
 import { Conversation, DecodedMessage } from "@xmtp/xmtp-js";
@@ -71,8 +70,6 @@ const handleRequest = frames(async (ctx: any) => {
     );
   }
 
-  const fonts = await getFonts();
-
   return {
     image: (
       <Container justify={"justify-end"}>
@@ -86,7 +83,6 @@ const handleRequest = frames(async (ctx: any) => {
         )}
       </Container>
     ),
-    imageOptions: { fonts },
     textInput: "Enter Message",
     buttons: [
       <Button

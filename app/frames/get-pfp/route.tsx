@@ -5,7 +5,6 @@ import { frames } from "@/app/frames";
 import { getOwnersAddress } from "@/app/utils/identity";
 import { getFonts } from "@/app/utils/display";
 import { Container } from "@/app/components/Container";
-import { appURL } from "@/app/utils";
 
 const handleRequest = frames(async (ctx: any) => {
   const address = await getOwnersAddress(ctx);

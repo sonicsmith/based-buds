@@ -5,13 +5,11 @@ import { getConversations } from "@/app/utils/xmtp";
 import { Button } from "frames.js/next";
 import { format } from "date-fns";
 import { getOwnersAddress } from "@/app/utils/identity";
-import { getFonts } from "@/app/utils/display";
 import { Container } from "@/app/components/Container";
 
 const handleRequest = frames(async (ctx: any) => {
   const ownersAddress = await getOwnersAddress(ctx);
   const conversations = await getConversations(ownersAddress);
-  const fonts = await getFonts();
 
   const currentState = ctx.state;
   const budIndex = currentState.conversationIndex;
@@ -92,7 +90,6 @@ const handleRequest = frames(async (ctx: any) => {
         )}
       </Container>
     ),
-    imageOptions: { fonts },
     buttons,
     state: updatedState,
   };
