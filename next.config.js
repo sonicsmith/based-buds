@@ -18,6 +18,18 @@ const nextConfig = {
             ],
           })
         );
+        config.plugins.push(
+          new CopyPlugin({
+            patterns: [
+              {
+                context: ".next/server",
+                to: "./chunks/[name][ext]",
+                from: "../../node_modules/@xmtp/user-preferences-bindings-wasm/dist/node",
+                filter: (resourcePath) => resourcePath.endsWith(".wasm"),
+              },
+            ],
+          })
+        );
       } else {
         config.plugins.push(
           new CopyPlugin({
