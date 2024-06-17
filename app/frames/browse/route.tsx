@@ -3,8 +3,10 @@
 import { Container } from "@/app/components/Container";
 import { ProfileView } from "@/app/components/ProfileView";
 import { frames } from "@/app/frames";
+import { appURL } from "@/app/utils";
 import { getProfile } from "@/app/utils/database";
 import { getOwnersAddress } from "@/app/utils/identity";
+import { getHasCheckMark } from "@/app/utils/viem";
 import { Button } from "frames.js/next";
 
 const handleRequest = frames(async (ctx: any) => {
@@ -19,6 +21,7 @@ const handleRequest = frames(async (ctx: any) => {
 
   const profile = await getProfile(updatedState.userIndex);
   const ownersAddress = await getOwnersAddress(ctx);
+  const hasCheckMark = await getHasCheckMark(profile.ownersAddress);
 
   const buttons = [
     <Button action="post" target={"/browse"}>
@@ -49,6 +52,15 @@ const handleRequest = frames(async (ctx: any) => {
   return {
     image: (
       <Container>
+        {hasCheckMark && (
+          <div tw="flex justify-center">
+            <img
+              src={`${appURL()}/images/blue-check.png`}
+              width="128"
+              height="128"
+            />
+          </div>
+        )}
         <ProfileView title={profile.title} bio={profile.bio} />
       </Container>
     ),

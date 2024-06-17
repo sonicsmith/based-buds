@@ -17,7 +17,10 @@ const handleRequest = frames(async (ctx: any) => {
         {!!profile ? (
           <ProfileView title={profile.title} bio={profile.bio} />
         ) : (
-          <div>Click below to create a profile</div>
+          <div tw="flex flex-col items-center bg-white p-8 rounded-full">
+            <div>Click &apos;Create&apos; to make your own profile.</div>
+            <div>Or &apos;Blue Check&apos; to verify your account.</div>
+          </div>
         )}
       </Container>
     ),
@@ -28,8 +31,8 @@ const handleRequest = frames(async (ctx: any) => {
       >
         {!!profile ? "Delete" : "Create"}
       </Button>,
-      <Button action="post" target={"/get-pfp"}>
-        Get PFP
+      <Button action="post" target={"/get-nft"}>
+        Blue Check
       </Button>,
       <Button action="post" target={"/export-wallet"}>
         Export

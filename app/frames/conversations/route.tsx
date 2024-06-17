@@ -67,7 +67,7 @@ const handleRequest = frames(async (ctx: any) => {
       <Container>
         {selectedConversation ? (
           <div tw="flex flex-col">
-            <div tw="flex mb-10 justify-center text-6xl">
+            <div tw="flex mb-10 justify-center text-5xl rounded-full bg-white p-8">
               Number of Buds: {conversations.length}
             </div>
             <div tw="flex flex-col bg-white p-10">

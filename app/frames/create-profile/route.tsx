@@ -44,16 +44,24 @@ const handleRequest = frames(async (ctx: any) => {
   }
 
   const images = [
-    <div tw="flex flex-col">Enter title</div>,
-    <div tw="flex flex-col">Enter Bio</div>,
+    <div tw="flex flex-col items-center rounded-full bg-white p-8">
+      <div>Enter Profile Title</div>
+      <div>(eg. &apos;Trading Tips&apos;)</div>
+    </div>,
+    <div tw="flex flex-col items-center rounded-full bg-white p-8">
+      <div>Enter Bio</div>
+      <div>(eg. &apos;I have the best alpha...&apos;)</div>
+    </div>,
     <div tw="flex flex-col">
-      Preview:
+      <div tw="flex justify-center rounded-full bg-white p-8 m-2">Preview:</div>
       <ProfileView
         title={updatedState.profileTitle}
         bio={updatedState.profileBio}
       />
     </div>,
-    <div tw="flex flex-col">Your profile has been created</div>,
+    <div tw="flex flex-col items-center rounded-full bg-white p-8">
+      Your profile has been created
+    </div>,
   ];
 
   const buttons = [

@@ -7,7 +7,7 @@ export const Container = ({
 }) => {
   return (
     <div
-      tw={`flex flex-col p-8 bg-blue-400 w-full h-screen text-5xl ${justify}`}
+      tw={`flex flex-col p-8 bg-[#0050FF] w-full h-screen text-5xl ${justify}`}
       style={{ fontFamily: "PatrickHand", fontWeight: 400 }}
     >
       {children}
