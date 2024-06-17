@@ -17,6 +17,7 @@ const handleRequest = frames(async (ctx: any) => {
             src={`${appURL()}/images/blue-check.png`}
             width="128"
             height="128"
+            alt="Blue Check Mark"
           />
         </div>
         <div tw="flex flex-col items-center rounded-full bg-white p-8">
