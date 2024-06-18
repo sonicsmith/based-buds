@@ -83,7 +83,7 @@ const handleRequest = frames(async (ctx: any) => {
             </div>
           </div>
         ) : (
-          <div tw="flex flex-col items-center text-6xl">
+          <div tw="flex flex-col items-center text-5xl rounded-full bg-white p-8">
             <div>No Conversations.</div>
             <div>Find a Bud to chat with.</div>
           </div>

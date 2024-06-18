@@ -72,9 +72,11 @@ const handleRequest = frames(async (ctx: any) => {
 
   return {
     image: (
-      <Container justify={"justify-end"}>
+      <Container
+        justify={messageDisplay.length ? "justify-end" : "justify-center"}
+      >
         {!messageDisplay.length ? (
-          <div tw="flex flex-col m-auto">
+          <div tw="flex flex-col items-center rounded-full bg-white p-8">
             <div>This is the start of your conversation</div>
             <div>Say Hello to your new bud! 👋</div>
           </div>
