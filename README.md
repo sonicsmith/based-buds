@@ -1,6 +1,13 @@
 # Based Buds Frame
 
-OpenFrames Match making Frame built with Frames.js, NextJS, and XMTP.
+OpenFrames Match making Frame.
+
+Stack:
+
+- Frames.js
+- NextJS
+- XMTP
+- NFT created with Zora on Base
 
 ![Screenshot](https://github.com/sonicsmith/based-buds/blob/main/public/images/main.jpg)
 

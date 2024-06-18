@@ -22,8 +22,8 @@ const handleRequest = frames(async (ctx: any) => {
         </div>
         <div tw="flex flex-col items-center rounded-full bg-white p-8">
           <div>A &apos;Based Buds&apos; Blue Check NFT</div>
-          <div>shows the world you have a verified</div>
-          <div>account and only costs 0.0001 ETH</div>
+          <div>shows the world you have a</div>
+          <div>verified account.</div>
         </div>
       </Container>
     ),

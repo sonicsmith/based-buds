@@ -7,7 +7,7 @@ export const ProfileView = ({ title, bio }: { title: string; bio: string }) => {
       >
         {title}
       </div>
-      <div tw="text-5xl">{bio}</div>
+      <div tw="text-5xl text-center">{bio}</div>
     </div>
   );
 };

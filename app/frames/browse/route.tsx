@@ -19,8 +19,10 @@ const handleRequest = frames(async (ctx: any) => {
       : currentState.userIndex,
   };
 
-  const profile = await getProfile(updatedState.userIndex);
-  const ownersAddress = await getOwnersAddress(ctx);
+  const [profile, ownersAddress] = await Promise.all([
+    getProfile(updatedState.userIndex),
+    getOwnersAddress(ctx),
+  ]);
   const hasCheckMark = await getHasCheckMark(profile.ownersAddress);
 
   const buttons = [
