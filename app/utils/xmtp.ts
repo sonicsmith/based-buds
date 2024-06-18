@@ -1,7 +1,7 @@
 import { Client } from "@xmtp/xmtp-js";
 import { getUserSigner } from "./identity";
 
-const env = "dev"; //process.env.NODE_ENV === "development" ? "dev" : "production";
+const env = process.env.NODE_ENV === "development" ? "dev" : "production";
 
 export const createXmtpIdentity = async (address: string) => {
   const signer = await getUserSigner(address);
