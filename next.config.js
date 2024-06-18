@@ -4,6 +4,7 @@ import CopyPlugin from "copy-webpack-plugin";
 const nextConfig = {
   webpack: (config, { isServer, dev }) => {
     config.externals.push("pino-pretty", "lokijs", "encoding");
+    console.log("Performing Webpack config", { isServer, dev });
     if (isServer) {
       if (!dev) {
         config.plugins.push(
