@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"frames --url http://localhost:3000\"",
     "start": "next start",
-    "postbuild": "ls .next/server/chunks/ && pwd && ls /var/task/.next/server/chunks/",
+    "postbuild": "ls /var/task/.next/server/",
     "build": "next build",
     "lint": "next lint"
   },
