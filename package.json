@@ -32,5 +32,10 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "overrides": {
+    "@xmtp/xmtp-js": {
+      "@xmtp/user-preferences-bindings-wasm": "@xmtp/user-preferences-bindings-wasm@0.3.5"
+    }
   }
 }
