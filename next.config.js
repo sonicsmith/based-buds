@@ -11,7 +11,7 @@ const nextConfig = {
           new CopyPlugin({
             patterns: [
               {
-                context: ".next/server",
+                context: "/var/task/.next/server",
                 to: "./app/[name][ext]",
                 from: "../../node_modules/@xmtp/user-preferences-bindings-wasm/dist/node",
                 filter: (resourcePath) => resourcePath.endsWith(".wasm"),
@@ -23,7 +23,7 @@ const nextConfig = {
           new CopyPlugin({
             patterns: [
               {
-                context: ".next/server",
+                context: "/var/task/.next/server",
                 to: "./chunks/[name][ext]",
                 from: "../../node_modules/@xmtp/user-preferences-bindings-wasm/dist/node",
                 filter: (resourcePath) => resourcePath.endsWith(".wasm"),
