@@ -49,5 +49,8 @@ export const createProfile = async (
 export const deleteProfile = async (
   ownersAddress: string
 ): Promise<QueryResult<QueryResultRow>> => {
+  if (!ownersAddress) {
+    throw new Error("ownersAddress not supplied");
+  }
   return sql`DELETE FROM Profiles WHERE OwnersAddress = ${ownersAddress};`;
 };

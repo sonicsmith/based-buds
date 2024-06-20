@@ -43,7 +43,10 @@ export const getOwnersAddress = async (ctx: any) => {
 
     walletAddress = profile?.ownedBy.address;
   }
-  return walletAddress || "";
+  if (!walletAddress) {
+    throw new Error("No address found for user");
+  }
+  return walletAddress;
 };
 
 export const getAccountAddress = async (ctx: any) => {
