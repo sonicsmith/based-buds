@@ -21,13 +21,6 @@ const handleRequest = frames(async (ctx) => {
         My Buds
       </Button>,
     ],
-    state: {
-      userIndex: 0,
-      conversationIndex: 0,
-      editingState: 0,
-      profileTitle: "",
-      profileBio: "",
-    },
   };
 });
 
