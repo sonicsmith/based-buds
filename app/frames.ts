@@ -16,6 +16,12 @@ export interface State {
   profileBio: string;
 }
 
+const FARCASTER_HUB_URL = process.env.FARCASTER_HUB_URL;
+const hubHttpUrl =
+  process.env.NODE_ENV === "development"
+    ? DEFAULT_DEBUGGER_HUB_URL
+    : FARCASTER_HUB_URL;
+
 export const frames = createFrames({
   basePath: "/frames",
   baseUrl: appURL(),
@@ -28,7 +34,7 @@ export const frames = createFrames({
   },
   middleware: [
     farcasterHubContext({
-      hubHttpUrl: DEFAULT_DEBUGGER_HUB_URL,
+      hubHttpUrl,
     }),
     openframes({
       clientProtocol: {
