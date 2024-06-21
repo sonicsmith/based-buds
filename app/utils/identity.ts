@@ -44,6 +44,7 @@ export const getOwnersAddress = async (ctx: any) => {
     walletAddress = profile?.ownedBy.address;
   }
   if (!walletAddress) {
+    console.error(JSON.stringify(ctx.message));
     throw new Error("No address found for user");
   }
   return walletAddress;
