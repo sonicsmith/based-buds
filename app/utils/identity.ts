@@ -27,6 +27,10 @@ export const getUserSigner = async (address: string) => {
 };
 
 export const getOwnersAddress = async (ctx: any) => {
+  // TODO: This doesn't seem to be the right way to get the address
+  if (typeof ctx === "string" && ctx.startsWith("0x")) {
+    return ctx;
+  }
   // XMTP, Farcaster, or Lens address
   let walletAddress: string | undefined =
     // farcaster
