@@ -35,7 +35,7 @@ const handleRequest = frames(async (ctx: any) => {
     .sort((a, b) => (a.sent > b.sent ? -1 : 1))
     .slice(0, 7) // Remove excess messages for now
     .map((message, index) => {
-      const isFromSender = message.senderAddress === accountAddress;
+      const isFromSender = message.senderAddress !== accountAddress;
       const text = message.content;
       const colors = isFromSender
         ? "bg-white text-black border-2 border-black"
