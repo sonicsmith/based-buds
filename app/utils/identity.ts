@@ -10,12 +10,10 @@ const getSHA256Hash = async (input: string) => {
 };
 
 export const getPrivateKey = async (address: string) => {
-  // TODO: Hash the seed key so it's non reversible
-  // const hexHash = await getSHA256Hash(address + process.env.SIGNER_SEED_KEY);
-  const seedKey = address + process.env.SIGNER_SEED_KEY;
-  const hexHash = seedKey
+  const sha256Hash = await getSHA256Hash(address + process.env.SIGNER_SEED_KEY);
+  const hexHash = sha256Hash
     .split("")
-    .map((_, i) => seedKey.charCodeAt(i).toString(16))
+    .map((_, i) => sha256Hash.charCodeAt(i).toString(16))
     .join("");
   const privateKeyArray = secp256.etc.hashToPrivateKey(hexHash);
   return secp256.etc.bytesToHex(privateKeyArray);
