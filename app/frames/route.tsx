@@ -8,7 +8,7 @@ const baseUrl = appURL();
 
 const handleRequest = frames(async (ctx) => {
   return {
-    image: `${baseUrl}/images/main.png`,
+    image: `${baseUrl}/images/main.gif`,
     imageOptions: { aspectRatio: "1:1" },
     buttons: [
       <Button action="post" target="/browse">

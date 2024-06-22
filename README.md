@@ -9,7 +9,7 @@ Stack:
 - XMTP
 - NFT created with Zora on Base
 
-![Screenshot](https://github.com/sonicsmith/based-buds/blob/main/public/images/main.png)
+![Screenshot](https://github.com/sonicsmith/based-buds/blob/main/public/images/main.gif)
 
 Feel free to reuse this code in any way you see fit!
 
