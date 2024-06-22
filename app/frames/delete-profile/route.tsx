@@ -11,7 +11,7 @@ const handleRequest = frames(async (ctx: any) => {
   const profile = await getProfileForAddress(address);
 
   if (!!profile && ctx.pressedButton) {
-    console.log("Delete profile", address);
+    console.log("Deleting profile for", address);
     await deleteProfile(address);
   }
 

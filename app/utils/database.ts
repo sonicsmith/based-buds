@@ -42,13 +42,14 @@ export const createProfile = async (
   profile: Profile
 ): Promise<QueryResult<QueryResultRow>> => {
   const { ownersAddress, accountAddress, title, bio } = profile;
-  console.log("Creating profile", profile);
+  console.log("Adding profile to database:", profile);
   return sql`INSERT INTO Profiles (OwnersAddress, AccountAddress, Title, Bio) VALUES (${ownersAddress}, ${accountAddress}, ${title}, ${bio});`;
 };
 
 export const deleteProfile = async (
   ownersAddress: string
 ): Promise<QueryResult<QueryResultRow>> => {
+  console.log("Deleting profile for OwnersAddress:", ownersAddress);
   if (!ownersAddress) {
     throw new Error("ownersAddress not supplied");
   }

@@ -25,6 +25,7 @@ const handleRequest = frames(async (ctx: any) => {
       updatedState.editingState = currentState.editingState + 1;
     }
     if (currentState.editingState === 2) {
+      console.log("Creating profile");
       const ownersAddress = await getOwnersAddress(ctx);
       const accountAddress = await createXmtpIdentity(ownersAddress);
       await createProfile({

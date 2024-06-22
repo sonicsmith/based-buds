@@ -20,6 +20,8 @@ const handleRequest = frames(async (ctx: any) => {
           <div tw="flex flex-col items-center bg-white p-8 rounded-full">
             <div>Click &apos;Create&apos; to make your own profile.</div>
             <div>Or &apos;Blue Check&apos; to verify your account.</div>
+            <div>Profiles are free to create but</div>
+            <div>Blue Checks will cost a small fee.</div>
           </div>
         )}
       </Container>

@@ -43,17 +43,7 @@ const handleRequest = frames(async (ctx: any) => {
   return {
     image: (
       <Container>
-        {!shouldShow ? (
-          <div tw="flex flex-col items-center rounded-full bg-white p-8">
-            <div tw="mb-2">Exporting your private key allows you</div>
-            <div tw="mb-2">
-              to use your &apos;Based Bud&apos; address anywhere.
-            </div>
-            <div tw="mb-2">Do not share this key with anyone.</div>
-            <div tw="mb-6"></div>
-            <div>Do you still wish to continue?</div>
-          </div>
-        ) : (
+        {shouldShow ? (
           <div tw="flex flex-col">
             <div tw="flex flex-col items-center rounded-full bg-white p-8">
               <div>{getSplitKey(privateKey)[0]}</div>
@@ -63,6 +53,15 @@ const handleRequest = frames(async (ctx: any) => {
               <div>You can use this key to chat in another XMTP</div>
               <div>chat client. We recommend Deconverse.</div>
             </div>
+          </div>
+        ) : (
+          <div tw="flex flex-col items-center rounded-full bg-white p-8">
+            <div tw="mb-2">Exporting your private key allows you</div>
+            <div tw="mb-2">
+              to use your &apos;Based Bud&apos; address anywhere.
+            </div>
+            <div tw="mb-6">Do not share this key with anyone.</div>
+            <div>Do you still wish to continue?</div>
           </div>
         )}
       </Container>

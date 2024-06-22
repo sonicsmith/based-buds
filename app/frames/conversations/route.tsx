@@ -20,6 +20,7 @@ const handleRequest = frames(async (ctx: any) => {
 
   let selectedConversation = null;
   if (conversations.length) {
+    console.log("Number of conversations:", conversations.length);
     selectedConversation = conversations[budIndex];
   }
 

@@ -57,6 +57,7 @@ const handleRequest = frames(async (ctx: any) => {
     .filter((m): m is JSX.Element => !!m);
 
   if (ctx.pressedButton && ctx.message.inputText) {
+    console.log("Sending message");
     await conversation?.send(ctx.message.inputText);
     // Fake the message if this occurs
     messageDisplay.unshift(
