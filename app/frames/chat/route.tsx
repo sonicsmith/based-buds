@@ -94,6 +94,12 @@ const handleRequest = frames(async (ctx: any) => {
       >
         Send
       </Button>,
+      <Button
+        action="post"
+        target={{ pathname: "/chat", query: { topic: conversation?.topic } }}
+      >
+        Refresh
+      </Button>,
       <Button action="post" target={"/"}>
         Home
       </Button>,

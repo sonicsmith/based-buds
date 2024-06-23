@@ -18,7 +18,9 @@ const handleRequest = frames(async (ctx: any) => {
   return {
     image: (
       <Container>
-        <div tw="flex flex-col">Your Profile has been deleted</div>
+        <div tw="flex flex-col items-center rounded-full bg-white p-8">
+          Your Profile has been deleted
+        </div>
       </Container>
     ),
     buttons: [
