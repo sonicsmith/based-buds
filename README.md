@@ -1,6 +1,6 @@
 # Based Buds Frame
 
-OpenFrames Match making Frame.
+Match-making & chat frame for Base
 
 Stack:
 
